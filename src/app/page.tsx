@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { Button } from "@/components/ui/button"
-import { MessageSquare, Zap, Shield, Sparkles, ChefHat, Bot, Github, ArrowRight } from 'lucide-react'
+import { MessageSquare, Zap, Shield, Sparkles, ChefHat, Github } from 'lucide-react'
 
 export default function LandingPage() {
   const featuresRef = useRef<HTMLDivElement>(null)
@@ -302,7 +302,7 @@ function Footer() {
     <footer className="bg-white py-4 text-center text-sm text-gray-500">
       <p className="mb-2">&copy; 2024 Yourbot. All rights reserved.</p>
       <div className="flex items-center justify-center">
-        <span className="mr-2">Made with ❤️ Ayush </span>
+        <span className="mr-2">Made with ❤️ Ayush Oswal </span>
         <a href="https://github.com/ayush-oswal/Yourbot" target="_blank" rel="noopener noreferrer">
           <Github className="w-5 h-5 text-gray-500 hover:text-blue-600 transition-colors" />
         </a>

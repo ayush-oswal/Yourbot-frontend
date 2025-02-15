@@ -1,16 +1,7 @@
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 
-import { DefaultSession } from 'next-auth';
-
-declare module 'next-auth' {
-  interface Session {
-    user: {
-      id?: string
-    } & DefaultSession['user']
-  }
-}
-
+    
 const handler = NextAuth({
   providers: [
     GoogleProvider({
@@ -23,36 +14,8 @@ const handler = NextAuth({
       if (!account || !user) {
         return false;
       }
-
-      console.log('signIn', user, account);
-
-      try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ 
-            email: user.email, 
-            name: user.name,
-          }),
-          credentials: 'include',
-        });
-
-        if (!response.ok) {
-          throw new Error('Login failed');
-        }
-
-        return true;
-      } catch (error) {
-        console.error('Login error:', error);
-        return false;
-      }
-    },
-    async session({ session, token }) {
-      if (session?.user) {
-        session.user.id = token.sub;
-      }
-      return session;
-    },
+      return true
+    }
   },
   pages: {
     signIn: '/auth/signin',
@@ -60,6 +23,7 @@ const handler = NextAuth({
   },
   session: {
     strategy: 'jwt',
+    maxAge: 24 * 60 * 60,
   },
 });
 

@@ -18,15 +18,7 @@ export function SignInButton() {
 
 export function SignOutButton() {
   const handleSignOut = async () => {
-    try {
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`, {
-        method: 'POST',
-        credentials: 'include',
-      });
-    } catch (error) {
-      console.error('Logout error:', error);
-    }
-
+    localStorage.removeItem('authToken');
     signOut({ callbackUrl: '/' });
   };
 
@@ -34,6 +26,7 @@ export function SignOutButton() {
     <Button 
       onClick={handleSignOut}
       variant="ghost"
+      className="bg-gray-700 hover:bg-gray-800 hover:text-white text-white text-lg py-3"
     >
       Sign out
     </Button>
