@@ -76,7 +76,7 @@ function Header({ scrollToFeatures }: { scrollToFeatures: () => void }) {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4, duration: 0.3 }}
             >
-              <Link href="#contact" className="hover:text-blue-600 transition-colors">Contact</Link>
+              <Link href="https://ayushoswal.live" target="_blank" className="hover:text-blue-600 transition-colors">Contact</Link>
             </motion.li>
           </ul>
         </nav>
