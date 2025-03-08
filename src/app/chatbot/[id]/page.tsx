@@ -315,28 +315,15 @@ function ChatBox({ id, chatbotData }: { id: string, chatbotData: ChatbotData }) 
             content: msg.content
           }));
 
-          // const response = await fetch(`${backendUrl}/inference`, {
-          //   method: 'POST',
-          //   headers: {
-          //     'Content-Type': 'application/json',
-          //     'Authorization': `Bearer ${localStorage.getItem('authToken')}`
-          //   },
-          //   body: JSON.stringify({
-          //     chatbot_id: id,
-          //     query: currentMessage,
-          //     previous_messages: previousMessages
-          //   })
-          // });
-
-          const response = await fetch(`${backendUrl}/inference/external`, {
+          const response = await fetch(`${backendUrl}/inference`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem('authToken')}`
             },
             body: JSON.stringify({
               chatbot_id: id,
               query: currentMessage,
-              api_key:"358ebac1-9165-4918-93cd-35a50e25a138",
               previous_messages: previousMessages
             })
           });
