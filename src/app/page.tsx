@@ -235,7 +235,7 @@ const Features = React.forwardRef<HTMLDivElement>((props, ref) => {
     { 
       icon: <Shield className="w-8 h-8 text-blue-600" />, 
       title: 'Secure & Private', 
-      description: 'Protect sensitive data with enterprise-grade encryption and compliance. Your users’ privacy is our top priority.'
+      description: 'Protect sensitive data with enterprise-grade encryption and compliance. Your user\'s privacy is our top priority.'
     },
     { 
       icon: <Sparkles className="w-8 h-8 text-blue-600" />, 

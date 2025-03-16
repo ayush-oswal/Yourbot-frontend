@@ -176,7 +176,7 @@ export default function ChatbotPage() {
         
         await notifyServer(key)
         
-        toast.success('File uploaded successfully, wait a while for it to be processed')
+        toast.success('File uploaded successfully, you\'ll be notified when it\'s processed')
         setFile(null)
       } else if (type === 'text' && textInput.trim()) {
         const { key, upload_url } = await getPresignedUrl('text')
@@ -185,7 +185,7 @@ export default function ChatbotPage() {
         
         await notifyServer(key)
         
-        toast.success('Text added successfully, wait a while for it to be processed')
+        toast.success('Text added successfully, you\'ll be notified when it\'s processed')
         setTextInput('')
       }
     } catch (error) {
@@ -204,6 +204,7 @@ export default function ChatbotPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
             <h2 className="text-2xl font-semibold mb-4">Add to Knowledge Base</h2>
+            <p className="text-sm text-gray-600 mb-4">For efficient retrieval, include nouns that describe who or what the content is about (e.g. people, companies, products, topics)</p>
             <div className="bg-white rounded-lg shadow-md p-6 mb-6">
               <h3 className="text-xl font-semibold mb-2">Upload File</h3>
               <Input
@@ -315,7 +316,7 @@ function ChatBox({ id, chatbotData }: { id: string, chatbotData: ChatbotData }) 
             content: msg.content
           }));
 
-          const response = await fetch(`${backendUrl}/inference`, {
+          const response = await fetch(`${backendUrl}/inference/`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -446,7 +447,7 @@ fetch('${backendUrl}/inference/external', {
         <div className="bg-white rounded-lg shadow-md p-6">
           <div 
             ref={chatboxRef} 
-            className="h-96 overflow-y-auto mb-4 bg-white rounded-lg shadow-md p-6 max-h-96 overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-blue-600 [&::-webkit-scrollbar-thumb]:rounded-full"
+            className="h-96 mb-4 bg-white rounded-lg shadow-md p-6 max-h-96 overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-blue-600 [&::-webkit-scrollbar-thumb]:rounded-full"
           >
             {messages.map((message, index) => (
               <div
