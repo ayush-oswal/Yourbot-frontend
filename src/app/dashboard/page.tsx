@@ -222,11 +222,12 @@ function CreateChatbotButton({ onCreate }: { onCreate: () => void }) {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const [loading, setLoading] = useState(false); 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true); 
     try {
-      // Add your API call here
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chatbot/create`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('authToken')}` },
@@ -241,6 +242,8 @@ function CreateChatbotButton({ onCreate }: { onCreate: () => void }) {
       }
     } catch (error) {
       console.error('Error creating chatbot:', error);
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -253,7 +256,11 @@ function CreateChatbotButton({ onCreate }: { onCreate: () => void }) {
     >
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button className="bg-blue-600 text-white hover:bg-blue-700 text-lg px-8 py-4">
+          <Button
+            className="bg-blue-600 text-white hover:bg-blue-700 text-lg px-8 py-4"
+            disabled={loading} // Disable button while loading
+            style={loading ? { opacity: 0.6, cursor: 'not-allowed' } : {}}
+          >
             <Plus className="w-6 h-6 mr-2" />
             Create New Chatbot
           </Button>
@@ -279,15 +286,19 @@ function CreateChatbotButton({ onCreate }: { onCreate: () => void }) {
                 id="description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder="Tell the chatbot what it's meant to do
-eg: You are XYZ company's info agent, your goal is to provide answers to the questions asked about the company..."
+                placeholder="Tell the chatbot what it's meant to do..."
                 maxLength={1000}
                 required
                 className="resize-none"
               />
             </div>
-            <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white text-lg py-3">
-              Create Chatbot
+            <Button
+              type="submit"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white text-lg py-3"
+              disabled={loading} // Disable button while loading
+              style={loading ? { opacity: 0.6, cursor: 'not-allowed' } : {}}
+            >
+              {loading ? 'Creating...' : 'Create Chatbot'}
             </Button>
           </form>
         </DialogContent>
@@ -309,6 +320,7 @@ function EditChatbotDialog({
 }) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const [loading, setLoading] = useState(false); // Loading state
 
   useEffect(() => {
     if (chatbot) {
@@ -319,6 +331,7 @@ function EditChatbotDialog({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true); // Start loading
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chatbot/edit`, {
         method: 'POST',
@@ -326,7 +339,7 @@ function EditChatbotDialog({
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`
         },
-        body: JSON.stringify({chatbot_id: chatbot?.id, name, description }),
+        body: JSON.stringify({ chatbot_id: chatbot?.id, name, description }),
       });
 
       if (response.ok) {
@@ -335,6 +348,8 @@ function EditChatbotDialog({
       }
     } catch (error) {
       console.error('Error updating chatbot:', error);
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -368,11 +383,13 @@ function EditChatbotDialog({
               className="min-h-[200px] resize-y text-lg p-3"
             />
           </div>
-          <Button 
-            type="submit" 
+          <Button
+            type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white text-lg py-6"
+            disabled={loading} // Disable button while loading
+            style={loading ? { opacity: 0.6, cursor: 'not-allowed' } : {}}
           >
-            Update Chatbot
+            {loading ? 'Updating...' : 'Update Chatbot'}
           </Button>
         </form>
       </DialogContent>
