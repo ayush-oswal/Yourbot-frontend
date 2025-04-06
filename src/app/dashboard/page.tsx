@@ -50,7 +50,6 @@ export default function DashboardPage() {
       try {
 
         const token = await fetch('/api/syncauth').then(res => res.json());
-        console.log(token);
         if (!token) {
           signOut({ callbackUrl: '/signin' })
         }
@@ -377,8 +376,8 @@ function EditChatbotDialog({
               id="edit-description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="Tell the chatbot what it's meant to do..."
-              maxLength={1000}
+              placeholder="Eg : You are ayush oswal's personal bot. You will answer user queries retaled to ayush. Have a sarcastic tone in your reply and use dark humor too!"
+              maxLength={500}
               required
               className="min-h-[200px] resize-y text-lg p-3"
             />
