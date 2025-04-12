@@ -5,7 +5,7 @@ export async function GET() {
   try {
     const user = await requireAuth();
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login/`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: user.email, name: user.name })
