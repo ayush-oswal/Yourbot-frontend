@@ -414,7 +414,7 @@ const previousMessages = [
 ];
 
 // Make API call
-fetch('${backendUrl}/inference/external/', {
+fetch('${backendUrl}/inference/external', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',

@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { Button } from "@/components/ui/button"
 import { MessageSquare, Zap, Shield, Sparkles, ChefHat, Github } from 'lucide-react'
+import { ChatWidget } from '@/components/chat-widget'
 
 export default function LandingPage() {
   const featuresRef = useRef<HTMLDivElement>(null)
@@ -32,6 +33,7 @@ export default function LandingPage() {
         <Header scrollToFeatures={scrollToFeatures} />
         <Hero />
         <Features ref={featuresRef} />
+        <ChatWidget />
         <Footer />
       </div>
     </div>
