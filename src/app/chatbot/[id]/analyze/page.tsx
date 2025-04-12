@@ -33,14 +33,14 @@ export default function AnalyzePage() {
   const [mounted, setMounted] = useState(false);
 
   const fetchChatbotData = async () => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chatbot/${id}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chatbot/${id}/`, {
       headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` }
     }).then(res => res.json());
     setChatbotData(response);
   };
 
   const fetchQueries = async (page: number) => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chatbot/${id}/queries?page_number=${page}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chatbot/${id}/queries?page_number=${page}/`, {
       headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` }
     }).then(res => res.json());
     

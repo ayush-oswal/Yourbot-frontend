@@ -227,7 +227,7 @@ function CreateChatbotButton({ onCreate }: { onCreate: () => void }) {
     e.preventDefault();
     setLoading(true); 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chatbot/create`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chatbot/create/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('authToken')}` },
         body: JSON.stringify({ name, description }),
@@ -332,7 +332,7 @@ function EditChatbotDialog({
     e.preventDefault();
     setLoading(true); // Start loading
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chatbot/edit`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chatbot/edit/`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

@@ -39,7 +39,7 @@ export default function ChatbotPage() {
 
   const fetchChatbotData = async (id: string) => {
     
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chatbot/${id}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chatbot/${id}/`, {
       headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` }
     }).then(res => res.json());
 
@@ -141,7 +141,7 @@ export default function ChatbotPage() {
   
   const notifyServer = async (key: string) => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/process`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/process/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -170,18 +170,18 @@ export default function ChatbotPage() {
       if (type === 'file' && file) {
         const { key, upload_url } = await getPresignedUrl('file')
         
-        await uploadToS3(upload_url, file)
+        const response = await uploadToS3(upload_url, file)
         
-        await notifyServer(key)
+        if(response) await notifyServer(key)
         
         toast.success('File uploaded successfully, you\'ll be notified when it\'s processed')
         setFile(null)
       } else if (type === 'text' && textInput.trim()) {
         const { key, upload_url } = await getPresignedUrl('text')
         
-        await uploadToS3(upload_url, textInput)
+        const response = await uploadToS3(upload_url, textInput)
         
-        await notifyServer(key)
+        if(response) await notifyServer(key)
         
         toast.success('Text added successfully, you\'ll be notified when it\'s processed')
         setTextInput('')
@@ -414,7 +414,7 @@ const previousMessages = [
 ];
 
 // Make API call
-fetch('${backendUrl}/inference/external', {
+fetch('${backendUrl}/inference/external/', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
