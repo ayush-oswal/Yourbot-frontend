@@ -290,7 +290,7 @@ function ChatBox({ id, chatbotData }: { id: string, chatbotData: ChatbotData }) 
     const [isLoading, setIsLoading] = useState(false);
     const chatboxRef = useRef<HTMLDivElement>(null);
     const [embedOpen, setEmbedOpen] = useState(false);
-    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000';
+    const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
   
     useEffect(() => {
       if (chatboxRef.current) {
