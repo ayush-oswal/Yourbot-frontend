@@ -94,7 +94,7 @@ export default function ChatbotPage() {
 
   const getPresignedUrl = async (type: 'file' | 'text') => {
     try {
-      const url = type === 'file' ? `${process.env.NEXT_PUBLIC_API_URL}/file` : `${process.env.NEXT_PUBLIC_API_URL}/text`;
+      const url = type === 'file' ? `${process.env.NEXT_PUBLIC_API_URL}/file/` : `${process.env.NEXT_PUBLIC_API_URL}/text/`;
       const response = await fetch(url, {
         method: 'GET',
         headers: {
