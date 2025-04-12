@@ -56,7 +56,7 @@ export default function DashboardPage() {
 
         localStorage.setItem('authToken', token);
 
-        const UserData = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user`, {
+        const UserData = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/`, {
           headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` }
         }).then(res => res.json());
   

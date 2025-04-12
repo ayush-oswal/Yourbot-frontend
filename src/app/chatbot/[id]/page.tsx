@@ -141,7 +141,7 @@ export default function ChatbotPage() {
   
   const notifyServer = async (key: string) => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/process`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/process/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -314,7 +314,7 @@ function ChatBox({ id, chatbotData }: { id: string, chatbotData: ChatbotData }) 
             content: msg.content
           }));
 
-          const response = await fetch(`${backendUrl}/inference`, {
+          const response = await fetch(`${backendUrl}/inference/`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
