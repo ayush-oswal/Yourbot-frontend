@@ -122,8 +122,10 @@ export default function ChatbotPage() {
         body: data,
         headers: data instanceof File ? {
             'Content-Type': 'application/pdf',
+            'x-amz-acl': 'bucket-owner-full-control'
         } : {
           'Content-Type': 'text/plain',
+          'x-amz-acl': 'bucket-owner-full-control'
         },
       })
       
