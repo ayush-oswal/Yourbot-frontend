@@ -35,6 +35,7 @@ export default function ChatbotPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [messages, setMessages] = useState<Message[]>([])
   const chatboxRef = useRef<HTMLDivElement>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [mounted, setMounted] = useState(false);
 
   const fetchChatbotData = async (id: string) => {
@@ -89,6 +90,7 @@ export default function ChatbotPage() {
       setFile(selectedFile)
     } else {
       toast.error('Please select a PDF file smaller than 3MB')
+      if (fileInputRef.current) fileInputRef.current.value = '';
     }
   }
 
@@ -178,6 +180,7 @@ export default function ChatbotPage() {
         
         toast.success('File uploaded successfully, you\'ll be notified when it\'s processed')
         setFile(null)
+        if (fileInputRef.current) fileInputRef.current.value = '';
       } else if (type === 'text' && textInput.trim()) {
         const { key, upload_url } = await getPresignedUrl('text')
         
@@ -212,6 +215,7 @@ export default function ChatbotPage() {
                 accept=".pdf"
                 onChange={handleFileChange}
                 className="mb-4"
+                ref={fileInputRef}
               />
               <Button
                 onClick={() => handleSubmit('file')}
