@@ -153,17 +153,29 @@ function ChatbotList({ chatbots, onEdit }: { chatbots: Chatbot[], onEdit: () => 
                   <h4 className="text-lg font-semibold mb-2">{chatbot.name}</h4>
                   <p className="text-sm text-blue-700">{chatbot.description}</p>
                 </div>
-                <Button
-                  variant="ghost"
-                  className="text-blue-600 hover:text-blue-800 hover:bg-blue-100"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setSelectedChatbot(chatbot);
-                    setEditOpen(true);
-                  }}
-                >
-                  Edit
-                </Button>
+                <div className="flex space-x-2">
+                  <Button
+                    variant="ghost"
+                    className="text-blue-600 hover:text-blue-800 hover:bg-blue-100"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.location.href = `/chatbot/${chatbot.id}`;
+                    }}
+                  >
+                    Add to knowledge base
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="text-blue-600 hover:text-blue-800 hover:bg-blue-100"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedChatbot(chatbot);
+                      setEditOpen(true);
+                    }}
+                  >
+                    Edit
+                  </Button>
+                </div>
               </div>
             </motion.li>
           ))}
